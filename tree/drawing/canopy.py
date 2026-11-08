@@ -2,7 +2,7 @@ import math
 from aqt import mw
 from aqt.qt import QColor, QBrush, QPainterPath, QPen, Qt
 from .. import settings
-from ..data import cards, debug_deck
+from ..data import cards
 from ..simulation import growth, placement
 from . import appearance, shapes
 
@@ -11,8 +11,6 @@ report = ""
 
 
 def current_deck():
-    if settings.DEBUG_USE_FAKE_DECK:
-        return debug_deck.fake_deck(settings.DEBUG_FAKE_DECK_SIZE, settings.DEBUG_SEED)
     return cards.cards
 
 

@@ -57,6 +57,9 @@ BARK_WIDTH_THIN = 1.5           # px: drawn widths at or below this get the thin
 BARK_WIDTH_THICK = 40           # px: drawn widths at or above this get the thick colour
 BARK_COLOR_CURVE = 0.6          # 1 = straight blend between the two; below 1 = darkens sooner (thinner branches already fairly dark); above 1 = only the thickest wood gets dark
 
+# --- Placement on the tree ---
+MINITWIG_COLOR = "#6e461e"      # same brown as the branches (110, 70, 30)
+
 # --- Trunk start ---
 TRUNK_START_MARGIN = -5     # px in from the bottom-left corner
 TRUNK_START_ANGLE = 40      # degrees above horizontal (90 = straight up)
@@ -71,38 +74,8 @@ EDGE_RANGE = 140            # px: distance at which repulsion starts to be felt
 EDGE_STEEPNESS = 6.5        # higher = force stays low longer, then shoots up near the boundary
 
 # --- Debug ---
-DEBUG_SHOW_FIELD = False     # paint the repulsion field as orange dots
 DEBUG_SEED = 2             # fixed seed while tuning
-DEBUG_TRUNK_NODES = 1500     # trunk length in nodes
-DEBUG_USE_FAKE_DECK = False      # True = place the fake deck; False = place the real deck (run cards.refresh_cards() first)
-
-# --- Debug overlays ---
-DEBUG_SHOW_OBSTACLES = False # blue boxes over the measured page content
-DEBUG_SHOW_OUTLINE = False  # red frame around the overlay
-
-# --- Debug: hide the items ---
 DEBUG_SHOW_ITEMS = True     # False = paint only the branches (no leaves, buds, flowers or minitwigs)
-
-# --- Debug gallery ---
-DEBUG_SHOW_GALLERY = False       # paint the gallery panel over the window
-DEBUG_GALLERY_X = 60            # px from the left edge of the overlay to the panel
-DEBUG_GALLERY_Y = 100           # px from the top of the overlay to the panel
-DEBUG_GALLERY_ZOOMS = (1, 4)    # one block of rows per zoom level; 1 = real size
-DEBUG_GALLERY_INTERVALS = (1, 3, 4, 8, 14, 21, 60)   # days: one leaf per interval in the first row
-DEBUG_GALLERY_COLOR_INTERVAL = 30   # days: the interval used for the colour row
-DEBUG_GALLERY_PADDING = 12      # px: space around the items, between rows, and the height of a label
-DEBUG_GALLERY_MIN_CELL = 56     # px: narrowest cell, so that neighbouring labels don't overlap
-DEBUG_GALLERY_BACKGROUND = "#2b2b2b"   # panel colour, so that the tree doesn't disturb the view
-
-# --- Debug fake deck ---
-DEBUG_FAKE_DECK_SIZE = 1000                  # how many cards fake_deck makes
-DEBUG_FAKE_KIND_WEIGHTS = {"new": 15, "learning": 3, "relearning": 2, "learnt": 80}   # relative weights, not percentages
-DEBUG_FAKE_SUSPENDED_CHANCE = 0.02          # chance that a card is suspended
-DEBUG_FAKE_BURIED_CHANCE = 0.02             # chance that a card that is not suspended is buried
-DEBUG_FAKE_LEECH_CHANCE = 0.25              # chance that a card carries the leech tag
-DEBUG_FAKE_MAX_INTERVAL = 365               # days: longest interval a fake card can have
-DEBUG_FAKE_HISTORY_DAYS = 400               # days: how far back a fake card's first review can lie
-DEBUG_FAKE_DUE_RANGE = (-10, 160)            # days until due for learnt cards; 0 or below means due
 
 # --- Steering ---
 PUSH_STRENGTH = 0.7         # how strongly the boundary push turns a tip
@@ -161,9 +134,6 @@ FLOWER_CENTER_OFFSET_RATIO = 0.45  # distance from the stem end to the flower's 
 FLOWER_CENTER_LINE_LENGTH = 0.3    # length of each centre line as a fraction of petal length (must stay short of where petals meet)
 FLOWER_CENTER_LINE_WIDTH_RATIO = 0.04   # centre line width as a fraction of the flower's width (never thinner than VEIN_MIN_WIDTH)
 
-# --- Placement on the tree ---
-MINITWIG_COLOR = "#6e461e"      # same brown as the branches (110, 70, 30)
-
 # --- Stopping rule ---
 SLOT_CHECK_ROUNDS = 10      # the tree counts its leaf slots every this many rounds and stops once there are enough
 
@@ -172,7 +142,7 @@ SLOT_SHRINK_STEP = 0.95     # each attempt multiplies the leaf spacing by this (
 SLOT_SHRINK_FLOOR = 0.5     # safety stop: the spacing is never shrunk below this fraction of the normal spacing
 
 # --- Background growth ---
-GROWTH_PAUSE = 0.001        # seconds the growth thread sleeps after each round; bigger = gentler on the interface, slower tree
+GROWTH_PAUSE = 0.004        # seconds the growth thread sleeps after each round; bigger = gentler on the interface, slower tree
 
 # --- Obstacle padding ---
 OBSTACLE_SMALL_SIZE = 120       # px: a rectangle whose shorter side is below this counts as small (buttons, text lines)

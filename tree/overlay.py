@@ -5,7 +5,7 @@ from aqt.qt import QPoint, QRectF, QTimer, QWidget, QPainter, QPen, QColor, Qt, 
 import math
 from . import settings
 from .data import cards
-from .drawing import bark, canopy, gallery
+from .drawing import bark, canopy
 from .simulation import growth
 
 
@@ -89,20 +89,6 @@ class TreeOverlay(QWidget):
 
     def paintEvent(self, event):
         painter = QPainter(self)
-        if settings.DEBUG_SHOW_OBSTACLES:
-            for x, y, w, h in self.obstacles:
-                painter.fillRect(QRectF(x, y, w, h), QColor(0, 0, 255, 90))
-
-        if settings.DEBUG_SHOW_FIELD:
-            w, h = self.width(), self.height()
-            for gx in range(0, w, 20):
-                for gy in range(0, h, 20):
-                    fx, fy = growth.push_from_boundaries(gx, gy, w, h, self.obstacles)
-                    strength = min(1.0, math.hypot(fx, fy))
-                    if strength > 0.01:
-                        painter.fillRect(gx - 2, gy - 2, 4, 4,
-                                         QColor(255, 140, 0, int(60 + 195 * strength)))
-
         painter.setRenderHint(QPainter.RenderHint.Antialiasing)
         for node in self.draw_order:
             if node.parent is not None:
@@ -113,14 +99,6 @@ class TreeOverlay(QWidget):
                 painter.drawLine(QLineF(node.parent.x, node.parent.y, node.x, node.y))
 
         canopy.paint(painter, self.items)
-
-        if settings.DEBUG_SHOW_OUTLINE:
-            pen = QPen(QColor("red"))
-            pen.setWidth(3)
-            painter.setPen(pen)
-            painter.drawRect(self.rect().adjusted(1, 1, -2, -2))
-
-        gallery.paint_gallery(painter)
 
 
 def create_overlay():
